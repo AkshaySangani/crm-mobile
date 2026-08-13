@@ -25,12 +25,18 @@ export default StyleSheet.create({
     marginBottom: Spacing.lg,
   },
 
+  titleContainer: {
+    alignItems: "center", // or "flex-start"
+    gap: Spacing.sm,
+  },
+
   title: {
     marginBottom: Spacing.sm,
   },
 
   card: {
     width: "100%",
+    padding: Spacing.sm
   },
 
   space: {

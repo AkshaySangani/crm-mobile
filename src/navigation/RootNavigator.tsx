@@ -3,7 +3,7 @@ import AuthNavigator from "./AuthNavigator";
 import AppNavigator from "./AppNavigator";
 
 const RootNavigator = () => {
-  const isLoggedIn = false;
+  const isLoggedIn = true;
 
   return isLoggedIn ? <AppNavigator /> : <AuthNavigator />;
 };

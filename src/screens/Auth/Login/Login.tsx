@@ -3,6 +3,7 @@ import { View } from "react-native";
 import { Screen, AppText, AppInput, AppButton, AppCard } from "@/components";
 import { Colors } from "@/theme/colors";
 import styles from "./styles";
+import AppImage from "@/components/ui/AppImage";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -31,23 +32,38 @@ const Login = () => {
 
         <View style={styles.logoContainer}>
           <View style={styles.logoBox}>
-            <AppText size="xl" weight="bold" color={Colors.common.white}>
-              CRM
+            <AppImage
+              source={require("@/assets/images/IEKA-logo.jpeg")}
+              contentFit="contain"
+              containerStyle={{
+                width: 120,
+                height: 120,
+              }}
+            />
+          </View>
+          <View style={styles.titleContainer}>
+            <AppText
+              size="xl"
+              lineBreakMode="head"
+              weight="bold"
+              style={styles.title}
+            >
+              Welcome, Let's{" "}
+              <AppText
+                size="xl"
+                weight="bold"
+                color={Colors.brand.primary}
+                center
+              >
+                Sign In
+              </AppText>
             </AppText>
           </View>
-
-          <AppText size="xl" weight="bold" style={styles.title}>
-            Welcome Back
-          </AppText>
-
-          <AppText size="sm" color={Colors.text.secondary} center>
-            Login to manage your account
-          </AppText>
         </View>
 
         {/* Login Card */}
 
-        <AppCard style={styles.card}>
+        <View style={styles.card}>
           <AppInput
             label="Email"
             placeholder="Enter your email"
@@ -72,7 +88,7 @@ const Login = () => {
           </AppText>
 
           <AppButton title="Login" loading={loading} onPress={handleLogin} />
-        </AppCard>
+        </View>
       </View>
     </Screen>
   );

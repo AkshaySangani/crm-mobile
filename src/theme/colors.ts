@@ -5,6 +5,7 @@ export const Colors = {
     primaryPurple: "#437cd3",
     primaryLight: "#5b84c4",
     primaryDark: "#2e466e",
+    
   },
 
   layout: {
