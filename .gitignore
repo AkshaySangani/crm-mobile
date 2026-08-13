@@ -49,3 +49,4 @@ temp_interactive_push.bat
 package-lock.json
 branch_structure.json
 /.vscode
+package-lock.json
