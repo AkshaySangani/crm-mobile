@@ -3,19 +3,18 @@ import { Pressable, View } from "react-native";
 import { AppText, AppInput, AppButton } from "@/components";
 import { Colors } from "@/theme/colors";
 import styles from "./styles";
-import { loginApi } from "@/apis/auth/auth.api";
+import { forgotPasswordApi, loginApi } from "@/apis/auth/auth.api";
 import { regex } from "@/utils/validation-regex";
 import { useAuthStore } from "@/store/auth.store";
-import { router } from "expo-router";
 import AuthLayout from "../layout";
+import { Ionicons } from "@expo/vector-icons";
 import { pathNames } from "@/utils/path-names";
 import { useNavigation } from "@react-navigation/native";
 import { AuthNavigationProp } from "@/navigation/types";
 
-const Login = () => {
+const ForgotPassword = () => {
   const navigation =
-      useNavigation<AuthNavigationProp>();
-
+    useNavigation<AuthNavigationProp>();
   const login = useAuthStore((state) => state.login);
 
   const [email, setEmail] = useState("");
@@ -56,7 +55,6 @@ const Login = () => {
     let isValid = true;
 
     setEmailError("");
-    setPasswordError("");
 
     const trimmedEmail = email.trim();
 
@@ -68,19 +66,14 @@ const Login = () => {
       isValid = false;
     }
 
-    if (!password.trim()) {
-      setPasswordError("Password is required");
-      isValid = false;
-    }
-
     return isValid;
   };
 
   // -----------------------------
-  // Login
+  // ForgotPassword
   // -----------------------------
 
-  const handleLogin = async () => {
+  const handleForgotPassword = async () => {
     if (!validateForm()) {
       return;
     }
@@ -88,22 +81,21 @@ const Login = () => {
     try {
       setLoading(true);
 
-      const response = await loginApi({
+      const response = await forgotPasswordApi({
         email: email.trim(),
-        password,
       });
 
-      console.log("Login response:", response);
+      console.log("ForgotPassword response:", response);
 
       if (response.success) {
         // set into auth store
-        login(response.data);
+        // login(response.data);
 
         // Navigate to home
         // navigation.navigate("/home");
       }
     } catch (error: any) {
-      console.log("Login error:", error);
+      console.log("ForgotPassword error:", error);
     } finally {
       setLoading(false);
     }
@@ -124,30 +116,20 @@ const Login = () => {
 
         <View style={styles.space} />
 
-        <AppInput
-          label="Password"
-          placeholder="Enter your password"
-          value={password}
-          onChangeText={handlePasswordChange}
-          password
-          error={passwordError}
-        />
-
-        <Pressable onPress={() => navigation.navigate(pathNames.auth.FORGOT_PASSWORD)}>
-          <AppText size="sm" color={Colors.link} style={styles.forgot}>
-            Forgot Password?
-          </AppText>
-        </Pressable>
-
         <AppButton
-          title="Login"
+          title="Submit"
           loading={loading}
           disabled={loading}
-          onPress={handleLogin}
+          onPress={handleForgotPassword}
         />
+        
+        <Pressable onPress={() => navigation.goBack()}><AppText size="sm" color={Colors.link} style={styles.back}>
+          <Ionicons name="arrow-back" size={16} color={Colors.link} /> Back to login
+        </AppText>
+        </Pressable>
       </View>
     </AuthLayout>
   );
 };
 
-export default Login;
+export default ForgotPassword;
