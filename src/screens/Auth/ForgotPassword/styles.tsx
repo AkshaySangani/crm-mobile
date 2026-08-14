@@ -1,5 +1,7 @@
 import { StyleSheet } from "react-native";
 import { Spacing } from "@/theme/spacing";
+import { Radius } from "@/theme/radius";
+import { Colors } from "@/theme/colors";
 
 export default StyleSheet.create({
 
@@ -12,8 +14,8 @@ export default StyleSheet.create({
     height: Spacing.md,
   },
 
-  forgot: {
-    alignSelf: "flex-end",
+  back: {
+    alignSelf: "center",
     marginVertical: Spacing.md,
   },
 });
