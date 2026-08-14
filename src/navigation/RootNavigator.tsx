@@ -1,11 +1,12 @@
 import React from "react";
 import AuthNavigator from "./AuthNavigator";
 import AppNavigator from "./AppNavigator";
+import { useAuthStore } from "@/store/auth.store";
 
 const RootNavigator = () => {
-  const isLoggedIn = true;
+  const {isAuthenticated} = useAuthStore();
 
-  return isLoggedIn ? <AppNavigator /> : <AuthNavigator />;
+  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
 };
 
 export default RootNavigator;

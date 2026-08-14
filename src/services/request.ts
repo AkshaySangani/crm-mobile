@@ -1,5 +1,5 @@
 import api from "./api";
-import { toastMessage } from "../utils/toast-message";
+// import { toastMessage } from "../utils/toast-message";
 
 interface RequestOptions {
   successMessage?: string;
@@ -20,11 +20,11 @@ export const apiRequest = {
         (response.data as any)?.message;
 
       if (options?.showSuccessToast) {
-        toastMessage.success(
-          apiMessage ||
-          options?.successMessage ||
-          "Saved Successfully"
-        );
+        // toastMessage.success(
+        //   apiMessage ||
+        //   options?.successMessage ||
+        //   "Saved Successfully"
+        // );
       }
 
       return response.data;
@@ -32,11 +32,11 @@ export const apiRequest = {
       const apiMessage =
         error?.response?.data?.message || error?.message;
 
-      toastMessage.error(
-        apiMessage ||
-        options?.errorMessage ||
-        "Something went wrong"
-      );
+      // toastMessage.error(
+      //   apiMessage ||
+      //   options?.errorMessage ||
+      //   "Something went wrong"
+      // );
 
       return error;
     }
@@ -54,11 +54,11 @@ export const apiRequest = {
         (response.data as any)?.message;
 
       if (options?.showSuccessToast !== false) {
-        toastMessage.success(
-          apiMessage ||
-          options?.successMessage ||
-          "Updated Successfully"
-        );
+        // toastMessage.success(
+        //   apiMessage ||
+        //   options?.successMessage ||
+        //   "Updated Successfully"
+        // );
       }
 
       return response.data;
@@ -66,11 +66,11 @@ export const apiRequest = {
       const apiMessage =
         error?.response?.data?.message??error?.message;
 
-      toastMessage.error(
-        apiMessage ||
-        options?.errorMessage ||
-        "Update Failed"
-      );
+      // toastMessage.error(
+      //   apiMessage ||
+      //   options?.errorMessage ||
+      //   "Update Failed"
+      // );
 
       return error;
     }
@@ -88,11 +88,11 @@ export const apiRequest = {
         (response.data as any)?.message;
 
       if (options?.showSuccessToast !== false) {
-        toastMessage.success(
-          apiMessage ||
-          options?.successMessage ||
-          "Updated Successfully"
-        );
+        // toastMessage.success(
+        //   apiMessage ||
+        //   options?.successMessage ||
+        //   "Updated Successfully"
+        // );
       }
 
       return response.data;
@@ -100,11 +100,11 @@ export const apiRequest = {
       const apiMessage =
         error?.response?.data?.message??error?.message??error?.message;
 
-      toastMessage.error(
-        apiMessage ||
-        options?.errorMessage ||
-        "Update Failed"
-      );
+      // toastMessage.error(
+      //   apiMessage ||
+      //   options?.errorMessage ||
+      //   "Update Failed"
+      // );
 
       return error;
     }
@@ -120,22 +120,22 @@ export const apiRequest = {
       const apiMessage =
         (response.data as any)?.message;
 
-      toastMessage.success(
-        apiMessage ||
-        options?.successMessage ||
-        "Deleted Successfully"
-      );
+      // toastMessage.success(
+      //   apiMessage ||
+      //   options?.successMessage ||
+      //   "Deleted Successfully"
+      // );
 
       return response.data;
     } catch (error: any) {
       const apiMessage =
         error?.response?.data?.message??error?.message;
 
-      toastMessage.error(
-        apiMessage ||
-        options?.errorMessage ||
-        "Delete Failed"
-      );
+      // toastMessage.error(
+      //   apiMessage ||
+      //   options?.errorMessage ||
+      //   "Delete Failed"
+      // );
 
       return error;
     }
@@ -150,10 +150,10 @@ export const apiRequest = {
       const apiMessage =
         error?.response?.data?.message || error?.message;
 
-      toastMessage.error(
-        apiMessage ||
-        "Something went wrong"
-      );
+      // toastMessage.error(
+      //   apiMessage ||
+      //   "Something went wrong"
+      // );
 
       return error;
     }

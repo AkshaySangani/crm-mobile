@@ -10,12 +10,22 @@ import AppText from "../AppText";
 import { Colors, Radius } from "@/theme";
 import styles from "./styles";
 
+type KeyboardType =
+  | "default"
+  | "number-pad"
+  | "decimal-pad"
+  | "numeric"
+  | "email-address"
+  | "phone-pad"
+  | "url";
+
 interface AppInputProps extends TextInputProps {
   label?: string;
   error?: string;
   password?: boolean;
   leftIcon?: keyof typeof Ionicons.glyphMap;
   rightIcon?: keyof typeof Ionicons.glyphMap;
+  keyboardType?: KeyboardType;
 }
 
 const AppInput = ({
