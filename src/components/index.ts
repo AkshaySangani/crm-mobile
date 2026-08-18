@@ -4,5 +4,5 @@ export { default as AppInput } from "./ui/AppInput";
 export { default as AppCard } from "./ui/AppCard";
 
 export { default as Screen } from "./layout/Screen";
-export { default as Loader }
-from "./feedback/Loader";
+export { default as Header } from "./layout/Header";
+export { default as Loader } from "./feedback/Loader";
