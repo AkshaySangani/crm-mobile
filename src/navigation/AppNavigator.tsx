@@ -6,6 +6,7 @@ import Attendance from "@/screens/Employee/Services/Attendance/Attendance";
 import { pathNames } from "@/utils/path-names";
 import Leave from "@/screens/Employee/Services/Leave/Leave";
 import ApplyLeave from "@/screens/Employee/Services/Leave/components/Leaves/ApplyLeave/ApplyLeave";
+import Reimbursement from "@/screens/Employee/Services/Reimbursement/Reimbursement";
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -35,6 +36,12 @@ const AppNavigator = () => {
       <Stack.Screen
         name={pathNames.employee.ApplyLeave}
         component={ApplyLeave}
+      />
+
+      {/* Reimbursements */}
+      <Stack.Screen
+        name={pathNames.employee.Reimbursement}
+        component={Reimbursement}
       />
     </Stack.Navigator>
   );
