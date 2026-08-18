@@ -3,14 +3,18 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  View,
   ViewStyle,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Colors } from "@/theme/colors";
 import styles from "./styles";
+import { LinearGradient } from "expo-linear-gradient";
 
 interface ScreenProps {
   children: ReactNode;
+  header?: ReactNode;
+  showBackground?: boolean;
   scroll?: boolean;
   backgroundColor?: string;
   padding?: boolean;
@@ -19,6 +23,8 @@ interface ScreenProps {
 
 const Screen = ({
   children,
+  header,
+  showBackground = false,
   scroll = true,
   backgroundColor = Colors.layout.pageBg,
   padding = true,
@@ -33,6 +39,27 @@ const Screen = ({
         },
       ]}
     >
+      {showBackground && (
+        <View pointerEvents="none" style={styles.background}>
+          {/* Blue gradient */}
+          <LinearGradient
+            colors={["#0878E8", "#0864DC", "#1747CC", "#1735BF"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.blueGradient}
+          />
+
+          {/* Subtle blue shapes */}
+          <View style={styles.blueShapeOne} />
+          <View style={styles.blueShapeTwo} />
+
+          {/* White lower sheet */}
+          <View style={styles.whiteSheet} />
+        </View>
+      )}
+
+      {header}
+      
       <KeyboardAvoidingView
         style={[styles.keyboard, style]}
         behavior={Platform.OS === "ios" ? "padding" : "height"}

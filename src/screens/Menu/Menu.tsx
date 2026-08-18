@@ -12,7 +12,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { Colors, FontSize, Radius, Spacing } from "../../theme";
 import { styles } from "./style";
-import { AppCard, AppText } from "@/components";
+import { AppCard, AppText, Header, Screen } from "@/components";
 import { AlertModal } from "@/components/ui/AppModal/modals/AlertModal/AlertModal";
 import { useAuthStore } from "@/store/auth.store";
 
@@ -86,8 +86,19 @@ export default function Menu() {
   const handleLogOut = () => {
     logout();
   };
+
   return (
-    <>
+    <Screen
+      showBackground
+      header={
+        <Header
+          title="Attendance"
+          subtitle="Track your attendance"
+          showBack
+          onBackPress={() => {}}
+        />
+      }
+    >
       <View style={styles.screen}>
         {/* Blue Header */}
         <View style={styles.headerBackground}>
@@ -323,6 +334,6 @@ export default function Menu() {
         onPrimary={handleLogOut}
         onSecondary={() => setLogoutVisible(false)}
       />
-    </>
+    </Screen>
   );
 }
