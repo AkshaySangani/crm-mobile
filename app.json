@@ -25,7 +25,13 @@
     },
     "plugins": [
       "expo-font",
-      "expo-router"
+      "expo-router",
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Allow CRM to use your location when marking attendance."
+        }
+      ]
     ]
   }
 }
