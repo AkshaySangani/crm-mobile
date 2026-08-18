@@ -6,11 +6,11 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import { Colors } from "../../theme";
 import { styles } from "./style";
 import { AppCard, AppText, Header, Screen } from "@/components";
 import { AlertModal } from "@/components/ui/AppModal/modals/AlertModal/AlertModal";
 import { useAuthStore } from "@/store/auth.store";
+import { Colors } from "@/theme";
 
 // const profileImage = require("../../assets/images/profile.png");
 

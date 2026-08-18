@@ -1,10 +1,12 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import Dashboard from "@/screens/Dashboard/Dashboard";
 import Tab from "@/components/ui/Tab/Tab";
-import Menu from "@/screens/Menu/Menu";
-import Services from "@/screens/Services/Services";
+
+// screens
+import Dashboard from "@/screens/Employee/Dashboard/Dashboard";
+import Menu from "@/screens/Employee/Menu/Menu";
+import Services from "@/screens/Employee/Services/Services";
 
 export type TabParamList = {
   Dashboard: undefined;
