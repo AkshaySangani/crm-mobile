@@ -21,7 +21,7 @@ export default function Tab({
   navigation,
 }: BottomTabBarProps) {
 
-    // render tab item
+    // render tab
   const renderItem: ListRenderItem<(typeof state.routes)[number]> = ({
     item: route,
     index,

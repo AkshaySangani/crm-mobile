@@ -116,10 +116,6 @@ const statusConfig = {
 export default function Leaves({onAddLeave}: {onAddLeave: () => void}) {
   return (
     <View style={styles.container}>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.scrollContent}
-      >
         {/* Filters */}
         <View style={styles.filtersRow}>
           <TouchableOpacity
@@ -233,7 +229,6 @@ export default function Leaves({onAddLeave}: {onAddLeave: () => void}) {
             />
           ))}
         </View>
-      </ScrollView>
 
       {/* Floating Action Button */}
       <TouchableOpacity

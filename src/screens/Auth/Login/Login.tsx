@@ -6,7 +6,6 @@ import styles from "./styles";
 import { loginApi } from "@/apis/auth/auth.api";
 import { regex } from "@/utils/validation-regex";
 import { useAuthStore } from "@/store/auth.store";
-import { router } from "expo-router";
 import AuthLayout from "../layout";
 import { pathNames } from "@/utils/path-names";
 import { useNavigation } from "@react-navigation/native";

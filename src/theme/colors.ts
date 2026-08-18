@@ -77,6 +77,9 @@ export const Colors = {
     danger: "#ffe9e5",
   },
 
+  purple: '#7446E8',
+  purpleLight: "#F0EAFE",
+
   link: "#4E72F8",
 
   error: "#ff4d4f",

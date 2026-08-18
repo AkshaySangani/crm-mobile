@@ -1,4 +1,4 @@
-import { Colors, FontSize, FontWeight, Radius, Shadows, Spacing } from "@/theme";
+import { Colors, FontSize, FontWeight, Radius, Spacing } from "@/theme";
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
 
   headerContent: {
     zIndex: 10,
-    paddingHorizontal: 36,
+    paddingHorizontal: Spacing.md,
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "flex-start",

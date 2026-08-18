@@ -1,30 +1,27 @@
 import React, { useState } from "react";
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "./styles";
-import { AppText } from "@/components";
+import { AppText, Header, Screen } from "@/components";
 import { Colors } from "@/theme";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigationProp } from "@/navigation/types";
 
 export default function ApplyLeave() {
+  const navigation = useNavigation<AppNavigationProp>();
   const [leaveType, setLeaveType] = useState("Annual Leave");
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      contentContainerStyle={styles.container}
+    <Screen
+      showBackground
+      header={
+        <Header
+          title={"Apply Leave"}
+          showBack
+          onBackPress={() => navigation.goBack()}
+        />
+      }
     >
-      <AppText
-        size="md"
-        weight="semiBold"
-        color={Colors.text.primary}
-        style={styles.title}
-      >
-        Apply Leave
-      </AppText>
 
       {/* Leave Type */}
       <AppText
@@ -36,21 +33,14 @@ export default function ApplyLeave() {
         Leave Type
       </AppText>
 
-      <TouchableOpacity
-        activeOpacity={0.8}
-        style={styles.input}
-      >
+      <TouchableOpacity activeOpacity={0.8} style={styles.input}>
         <MaterialCommunityIcons
           name="calendar-outline"
           size={21}
           color={Colors.brand.primary}
         />
 
-        <AppText
-          size="sm"
-          color={Colors.text.primary}
-          style={styles.inputText}
-        >
+        <AppText size="sm" color={Colors.text.primary} style={styles.inputText}>
           {leaveType}
         </AppText>
 
@@ -73,10 +63,7 @@ export default function ApplyLeave() {
             From Date
           </AppText>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.input}
-          >
+          <TouchableOpacity activeOpacity={0.8} style={styles.input}>
             <MaterialCommunityIcons
               name="calendar-outline"
               size={20}
@@ -103,10 +90,7 @@ export default function ApplyLeave() {
             To Date
           </AppText>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.input}
-          >
+          <TouchableOpacity activeOpacity={0.8} style={styles.input}>
             <MaterialCommunityIcons
               name="calendar-outline"
               size={20}
@@ -134,31 +118,18 @@ export default function ApplyLeave() {
         Reason
       </AppText>
 
-      <TouchableOpacity
-        activeOpacity={1}
-        style={styles.reasonInput}
-      >
-        <AppText
-          size="sm"
-          color={Colors.text.secondary}
-        >
+      <TouchableOpacity activeOpacity={1} style={styles.reasonInput}>
+        <AppText size="sm" color={Colors.text.secondary}>
           Enter reason for leave
         </AppText>
       </TouchableOpacity>
 
       {/* Submit */}
-      <TouchableOpacity
-        activeOpacity={0.85}
-        style={styles.submitButton}
-      >
-        <AppText
-          size="sm"
-          weight="semiBold"
-          color={Colors.common.white}
-        >
+      <TouchableOpacity activeOpacity={0.85} style={styles.submitButton}>
+        <AppText size="sm" weight="semiBold" color={Colors.common.white}>
           Apply Leave
         </AppText>
       </TouchableOpacity>
-    </ScrollView>
+    </Screen>
   );
 }

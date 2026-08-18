@@ -6,9 +6,13 @@ import { styles } from "./styles";
 import { Colors } from "@/theme";
 import { FlatList } from "react-native";
 import { AppCard, Screen } from "@/components";
+import { useNavigation } from "expo-router";
+import { AppNavigationProp, AppStackParamList } from "@/navigation/types";
+import { pathNames } from "@/utils/path-names";
 
 type ServiceItem = {
   title: string;
+  path: keyof AppStackParamList;
   description: string;
   icon: keyof typeof MaterialCommunityIcons.glyphMap;
   iconColor: string;
@@ -18,49 +22,57 @@ type ServiceItem = {
 const services: ServiceItem[] = [
   {
     title: "Attendance",
+    path: pathNames.employee.Attendance,
     description: "View your attendance\nrecords and history",
     icon: "calendar-clock-outline",
-    iconColor: "#1769E0",
-    iconBackground: "#E5EFFD",
+    iconColor: Colors.status.pending,
+    iconBackground: Colors.statusLight.pending,
   },
   {
     title: "Leave",
+    path: pathNames.employee.Leave,
     description: "Apply for leave and\nview status",
     icon: "calendar-check-outline",
-    iconColor: "#159447",
-    iconBackground: "#E7F7E9",
+    iconColor: Colors.status.success,
+    iconBackground: Colors.statusLight.success,
   },
   {
     title: "Reimbursement",
+    path: pathNames.employee.Reimbursement,
     description: "Submit and track your\nreimbursement",
     icon: "wallet-outline",
-    iconColor: "#7446E8",
-    iconBackground: "#F0EAFE",
+    iconColor: Colors.purple,
+    iconBackground: Colors.purpleLight,
   },
   {
     title: "Manual Punch",
+    path: pathNames.employee.ManualPunch,
     description: "Add manual check-in\nor check-out",
     icon: "clock-outline",
-    iconColor: "#F28B00",
-    iconBackground: "#FFF1E3",
+    iconColor: Colors.status.warning,
+    iconBackground: Colors.statusLight.warning,
   },
   {
     title: "Payslip",
+    path: pathNames.employee.Payslip,
     description: "View and download\nyour payslips",
     icon: "file-document-outline",
-    iconColor: "#16A99E",
-    iconBackground: "#E6F7F5",
+    iconColor: Colors.status.success,
+    iconBackground: Colors.statusLight.success,
   },
   {
     title: "Resign",
+    path: pathNames.employee.Resign,
     description: "Submit your resignation\nrequest",
     icon: "logout",
-    iconColor: "#ED6691",
-    iconBackground: "#FDEAF1",
+    iconColor: Colors.status.danger,
+    iconBackground: Colors.statusLight.danger,
   },
 ];
 
 export default function Services() {
+  const navigation =
+        useNavigation<AppNavigationProp>();
   return (
     <Screen
       showBackground
@@ -89,7 +101,7 @@ export default function Services() {
         contentContainerStyle={styles.listContent}
         columnWrapperStyle={styles.columnWrapper}
         renderItem={({ item }: { item: ServiceItem }) => (
-          <AppCard style={styles.serviceCard}>
+          <AppCard style={styles.serviceCard} onPress={() => navigation.navigate(item.path)}>
             {/* Icon */}
             <View
               style={[

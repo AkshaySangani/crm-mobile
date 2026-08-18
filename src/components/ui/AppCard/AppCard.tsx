@@ -1,21 +1,23 @@
 import React from "react";
-import { View, ViewProps } from "react-native";
+import { Pressable, View, ViewProps } from "react-native";
 import styles from "./styles";
 
 interface AppCardProps extends ViewProps {
   padding?: boolean;
+  onPress?: () => void;
 }
 
 const AppCard = ({
   children,
   padding = true,
   style,
+  onPress,
   ...props
 }: AppCardProps) => {
   return (
-    <View {...props} style={[styles.card, padding && styles.padding, style]}>
+    <Pressable {...props} style={[styles.card, padding && styles.padding, style]} onPress={onPress}>
       {children}
-    </View>
+    </Pressable>
   );
 };
 
