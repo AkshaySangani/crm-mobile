@@ -1,9 +1,8 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Dashboard from "@/screens/Dashboard/Dashboard";
 import { AppStackParamList } from "./types";
-import Services from "@/screens/Services/Services";
-import Menu from "@/screens/Menu/Menu";
+import Leave from "@/screens/Services/Leave/Leave";
+import TabNavigator from "@/screens/Employee/TabNavigator/TabNavigator";
 
 const Stack = createNativeStackNavigator<AppStackParamList>();
 
@@ -14,8 +13,11 @@ const AppNavigator = () => {
         headerShown: false,
       }}
     >
-      {/* <Stack.Screen name="Dashboard" component={Dashboard} /> */}
-      <Stack.Screen name="Dashboard" component={Menu} />
+      {/* Main Application */}
+      <Stack.Screen
+        name="MainTabs"
+        component={TabNavigator}
+      />
     </Stack.Navigator>
   );
 };

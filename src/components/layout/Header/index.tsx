@@ -1,6 +1,8 @@
 import React, { ReactNode } from "react";
 import { Text, TouchableOpacity, View, ViewStyle } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { Colors, FontSize, FontWeight } from "@/theme";
+import AppText from "@/components/ui/AppText";
 
 interface HeaderProps {
   title: string;
@@ -55,7 +57,7 @@ const Header = ({
               alignItems: "flex-start",
             }}
           >
-            <Ionicons name="arrow-back" size={24} color="#111827" />
+            <Ionicons name="arrow-back" size={24} color={Colors.common.white} />
           </TouchableOpacity>
         )}
 
@@ -68,24 +70,24 @@ const Header = ({
         >
           <Text
             style={{
-              fontSize: 20,
-              fontWeight: "700",
-              color: "#111827",
+              fontSize: FontSize.xl,
+              fontWeight: FontWeight.bold,
+              color: Colors.common.white,
             }}
           >
             {title}
           </Text>
 
           {subtitle && (
-            <Text
+            <AppText
+              size="sm"
               style={{
-                fontSize: 13,
                 color: "#6B7280",
                 marginTop: 2,
               }}
             >
               {subtitle}
-            </Text>
+            </AppText>
           )}
         </View>
       </View>

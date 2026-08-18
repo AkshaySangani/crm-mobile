@@ -32,6 +32,7 @@ export const Colors = {
   border: {
     primary: "#cccccc",
     input: "#aaaaaa",
+    secondary: "rgba(255,255,255,0.8)",
   },
 
   input: {

@@ -10,5 +10,6 @@ export type AuthNavigationProp =
   NativeStackNavigationProp<AuthStackParamList>;
 
 export type AppStackParamList = {
+  MainTabs: undefined;
   Dashboard: undefined;
 };
