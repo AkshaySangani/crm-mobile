@@ -1,9 +1,5 @@
 import React, { useState } from "react";
-import {
-  Switch,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Switch, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import { styles } from "./style";
@@ -11,6 +7,7 @@ import { AppCard, AppText, Header, Screen } from "@/components";
 import { AlertModal } from "@/components/ui/AppModal/modals/AlertModal/AlertModal";
 import { useAuthStore } from "@/store/auth.store";
 import { Colors } from "@/theme";
+import { logoutApi } from "@/apis/auth/auth.api";
 
 // const profileImage = require("../../assets/images/profile.png");
 
@@ -67,9 +64,10 @@ const menuItems = [
 ];
 
 export default function Menu() {
-  const { logout } = useAuthStore();
+  const { logout, refreshToken } = useAuthStore();
   const [darkMode, setDarkMode] = React.useState<boolean>(false);
   const [logoutVisible, setLogoutVisible] = useState<boolean>(false);
+  const [logoutLoading, setLogoutLoading] = useState<boolean>(false);
 
   // handle press on menus
   const handleMenuPress = (type: "logout" | string) => {
@@ -79,8 +77,15 @@ export default function Menu() {
   };
 
   // logout
-  const handleLogOut = () => {
-    logout();
+  const handleLogOut = async () => {
+    setLogoutLoading(true);
+    const response = await logoutApi({
+      refreshToken: refreshToken ?? "",
+    });
+    if (response.success) {
+      logout();
+    }
+    setLogoutLoading(false);
   };
 
   return (
@@ -289,6 +294,7 @@ export default function Menu() {
         primaryText={"Yes"}
         secondaryText={"No"}
         onPrimary={handleLogOut}
+        loading={logoutLoading}
         onSecondary={() => setLogoutVisible(false)}
       />
     </Screen>

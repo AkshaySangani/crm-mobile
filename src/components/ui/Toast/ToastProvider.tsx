@@ -1,9 +1,17 @@
-import { Colors, Radius, Spacing } from "@/theme";
-import React, { createContext, useContext, useRef, useState } from "react";
-import { Animated, Pressable, Text, View } from "react-native";
+import React, {
+  createContext,
+  useContext,
+  useRef,
+  useState,
+} from "react";
+import { Animated, Pressable, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-type ToastType = "success" | "error" | "info";
+import { Colors, Radius, Spacing } from "@/theme";
+import { AppText } from "@/components";
+import { registerToast } from "@/utils/toast";
+
+export type ToastType = "success" | "error" | "info";
 
 type Toast = {
   id: number;
@@ -17,19 +25,39 @@ type ToastContextType = {
 
 const ToastContext = createContext<ToastContextType | null>(null);
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
+export function ToastProvider({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const insets = useSafeAreaInsets();
+
   const [toasts, setToasts] = useState<Toast[]>([]);
   const id = useRef(0);
 
   const show = (message: string, type: ToastType = "info") => {
     const toastId = ++id.current;
-    setToasts((prev) => [...prev, { id: toastId, message, type }]);
+
+    setToasts((prev) => [
+      ...prev,
+      {
+        id: toastId,
+        message,
+        type,
+      },
+    ]);
 
     setTimeout(() => {
-      setToasts((prev) => prev.filter((t) => t.id !== toastId));
+      setToasts((prev) =>
+        prev.filter((toast) => toast.id !== toastId)
+      );
     }, 3000);
   };
+
+  // Register global toast handler
+  React.useEffect(() => {
+    registerToast(show);
+  }, []);
 
   return (
     <ToastContext.Provider value={{ show }}>
@@ -50,7 +78,9 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             key={toast.id}
             toast={toast}
             onClose={() =>
-              setToasts((prev) => prev.filter((t) => t.id !== toast.id))
+              setToasts((prev) =>
+                prev.filter((t) => t.id !== toast.id)
+              )
             }
           />
         ))}
@@ -74,14 +104,14 @@ function ToastItem({
       duration: 200,
       useNativeDriver: true,
     }).start();
-  }, []);
+  }, [opacity]);
 
   const bg =
     toast.type === "success"
       ? Colors.status.success
       : toast.type === "error"
-      ? Colors.status.danger
-      : Colors.status.pending;
+        ? Colors.status.danger
+        : Colors.status.pending;
 
   return (
     <Animated.View
@@ -96,15 +126,14 @@ function ToastItem({
       }}
     >
       <Pressable onPress={onClose}>
-        <Text
-          style={{
-            color: Colors.common.white,
-            textAlign: "center",
-            fontWeight: "600",
-          }}
+        <AppText
+          size="sm"
+          weight="semiBold"
+          color={Colors.common.white}
+          center
         >
           {toast.message}
-        </Text>
+        </AppText>
       </Pressable>
     </Animated.View>
   );
@@ -112,6 +141,12 @@ function ToastItem({
 
 export function useToast() {
   const ctx = useContext(ToastContext);
-  if (!ctx) throw new Error("useToast must be inside ToastProvider");
+
+  if (!ctx) {
+    throw new Error(
+      "useToast must be inside ToastProvider"
+    );
+  }
+
   return ctx;
 }
