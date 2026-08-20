@@ -5,6 +5,13 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 export type AuthStackParamList = {
   Login: undefined;
   ForgotPassword: undefined;
+  OtpVerify: {
+    email: string;
+    type?: "forgot-password" | "login";
+  };
+  ResetPassword: {
+    token: string;
+  };
 };
 
 export type AuthNavigationProp =

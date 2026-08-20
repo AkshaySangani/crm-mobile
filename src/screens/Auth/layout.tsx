@@ -7,9 +7,10 @@ import AppImage from "@/components/ui/AppImage";
 
 interface AuthLayoutProps {
     children: ReactNode;
+    title?: ReactNode;
 }
 
-const AuthLayout = ({children}: AuthLayoutProps) => {
+const AuthLayout = ({title,children}: AuthLayoutProps) => {
 
   return (
     <Screen>
@@ -28,22 +29,7 @@ const AuthLayout = ({children}: AuthLayoutProps) => {
           </View>
 
           <View style={styles.titleContainer}>
-            <AppText
-              size="xl"
-              lineBreakMode="head"
-              weight="bold"
-              style={styles.title}
-            >
-              Welcome, Let's{" "}
-              <AppText
-                size="xl"
-                weight="bold"
-                color={Colors.brand.primary}
-                center
-              >
-                Sign In
-              </AppText>
-            </AppText>
+            {title}
           </View>
         </View>
 

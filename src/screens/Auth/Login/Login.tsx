@@ -12,8 +12,7 @@ import { useNavigation } from "@react-navigation/native";
 import { AuthNavigationProp } from "@/navigation/types";
 
 const Login = () => {
-  const navigation =
-      useNavigation<AuthNavigationProp>();
+  const navigation = useNavigation<AuthNavigationProp>();
 
   const login = useAuthStore((state) => state.login);
 
@@ -92,8 +91,6 @@ const Login = () => {
         password,
       });
 
-      console.log("Login response:", response);
-
       if (response.success) {
         // set into auth store
         login(response.data);
@@ -109,7 +106,16 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout
+      title={
+        <AppText size="xl" lineBreakMode="head" weight="bold">
+          Welcome, Let's{" "}
+          <AppText size="xl" weight="bold" color={Colors.brand.primary} center>
+            Sign In
+          </AppText>
+        </AppText>
+      }
+    >
       <View style={styles.card}>
         <AppInput
           label="Email"
@@ -132,7 +138,9 @@ const Login = () => {
           error={passwordError}
         />
 
-        <Pressable onPress={() => navigation.navigate(pathNames.auth.FORGOT_PASSWORD)}>
+        <Pressable
+          onPress={() => navigation.navigate(pathNames.auth.FORGOT_PASSWORD)}
+        >
           <AppText size="sm" color={Colors.link} style={styles.forgot}>
             Forgot Password?
           </AppText>

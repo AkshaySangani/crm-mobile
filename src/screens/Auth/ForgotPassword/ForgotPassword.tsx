@@ -12,16 +12,12 @@ import { pathNames } from "@/utils/path-names";
 import { useNavigation } from "@react-navigation/native";
 import { AuthNavigationProp } from "@/navigation/types";
 
-const ForgotPassword = () => {
-  const navigation =
-    useNavigation<AuthNavigationProp>();
-  const login = useAuthStore((state) => state.login);
+const OtpVerify = () => {
+  const navigation = useNavigation<AuthNavigationProp>();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -35,15 +31,6 @@ const ForgotPassword = () => {
     // Clear error while typing
     if (emailError) {
       setEmailError("");
-    }
-  };
-
-  const handlePasswordChange = (value: string) => {
-    setPassword(value);
-
-    // Clear error while typing
-    if (passwordError) {
-      setPasswordError("");
     }
   };
 
@@ -70,10 +57,10 @@ const ForgotPassword = () => {
   };
 
   // -----------------------------
-  // ForgotPassword
+  // OtpVerify
   // -----------------------------
 
-  const handleForgotPassword = async () => {
+  const handleOtpVerify = async () => {
     if (!validateForm()) {
       return;
     }
@@ -85,24 +72,29 @@ const ForgotPassword = () => {
         email: email.trim(),
       });
 
-      console.log("ForgotPassword response:", response);
+      console.log("OtpVerify response:", response);
 
       if (response.success) {
-        // set into auth store
-        // login(response.data);
-
         // Navigate to home
-        // navigation.navigate("/home");
+        navigation.navigate(pathNames.auth.OTP_VERIFY, {
+          email: email,
+        });
       }
     } catch (error: any) {
-      console.log("ForgotPassword error:", error);
+      console.log("OtpVerify error:", error);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <AuthLayout>
+    <AuthLayout
+      title={
+        <AppText size="xl" lineBreakMode="head" weight="bold">
+          Forgot Password
+        </AppText>
+      }
+    >
       <View style={styles.card}>
         <AppInput
           label="Email"
@@ -120,16 +112,18 @@ const ForgotPassword = () => {
           title="Submit"
           loading={loading}
           disabled={loading}
-          onPress={handleForgotPassword}
+          onPress={handleOtpVerify}
         />
-        
-        <Pressable onPress={() => navigation.goBack()}><AppText size="sm" color={Colors.link} style={styles.back}>
-          <Ionicons name="arrow-back" size={16} color={Colors.link} /> Back to login
-        </AppText>
+
+        <Pressable onPress={() => navigation.goBack()}>
+          <AppText size="sm" color={Colors.link} style={styles.back}>
+            <Ionicons name="arrow-back" size={16} color={Colors.link} /> Back to
+            login
+          </AppText>
         </Pressable>
       </View>
     </AuthLayout>
   );
 };
 
-export default ForgotPassword;
+export default OtpVerify;

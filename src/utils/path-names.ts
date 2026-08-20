@@ -3,7 +3,7 @@ export const pathNames = {
   auth: {
     LOGIN: "Login",
     FORGOT_PASSWORD: "ForgotPassword",
-    OTP_VERIFY: "OptVerify",
+    OTP_VERIFY: "OtpVerify",
     RESET_PASSWORD: "ResetPassword",
   },
   employee: {

@@ -7,6 +7,7 @@ export default StyleSheet.create({
   container: {
     flexGrow: 1,
     justifyContent: "center",
+    gap:Spacing.xs,
     paddingVertical: 20,
   },
 

@@ -1,6 +1,7 @@
 
 /**
  * Mask email
+ * e.g, abc***@gmail.com
  */
 export function maskEmail(email: string): string {
   const [username, domain] = email.split("@");
