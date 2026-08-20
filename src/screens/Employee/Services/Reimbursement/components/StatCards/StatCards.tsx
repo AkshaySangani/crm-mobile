@@ -76,15 +76,13 @@ const StatCards = () => {
             size="sm"
             weight="bold"
             color={Colors.text.primary}
-            style={styles.count}
           >
             {item.count}
           </AppText>
 
           <AppText
-            size="xs"
+            size="xxs"
             color={Colors.text.secondary}
-            style={styles.label}
           >
             {item.label}
           </AppText>
@@ -93,7 +91,6 @@ const StatCards = () => {
             size="xs"
             weight="semiBold"
             color={Colors.brand.primary}
-            style={styles.amount}
           >
             {item.amount}
           </AppText>

@@ -11,6 +11,8 @@ import { styles } from "./styles";
 import { Header, Screen } from "@/components";
 import { AppNavigationProp } from "@/navigation/types";
 import { useNavigation } from "@react-navigation/native";
+import MonthPicker, { MonthPickerValue } from "@/components/ui/MonthPicker/MonthPicker";
+import YearPicker, { YearPickerValue } from "@/components/ui/YearPicker/YearPicker";
 
 export default function Attendance() {
     const navigation =
@@ -42,49 +44,11 @@ export default function Attendance() {
         <View>
           {/* Filters */}
           <View style={styles.filters}>
-            <TouchableOpacity activeOpacity={0.8} style={styles.filterButton}>
-              <MaterialCommunityIcons
-                name="calendar-month-outline"
-                size={16}
-                color={Colors.brand.primary}
-              />
+            {/* <MonthPicker onChange={() => {}} /> */}
 
-              <AppText
-                size="sm"
-                color={Colors.text.primary}
-                style={styles.filterText}
-              >
-                May
-              </AppText>
-
-              <MaterialCommunityIcons
-                name="chevron-down"
-                size={18}
-                color={Colors.brand.primary}
-              />
-            </TouchableOpacity>
-
-            <TouchableOpacity activeOpacity={0.8} style={styles.filterButton}>
-              <MaterialCommunityIcons
-                name="calendar-month-outline"
-                size={16}
-                color={Colors.brand.primary}
-              />
-
-              <AppText
-                size="sm"
-                color={Colors.text.primary}
-                style={styles.filterText}
-              >
-                2025
-              </AppText>
-
-              <MaterialCommunityIcons
-                name="chevron-down"
-                size={18}
-                color={Colors.brand.primary}
-              />
-            </TouchableOpacity>
+            <YearPicker onChange={function (year: YearPickerValue): void {
+              throw new Error("Function not implemented.");
+            } } />
           </View>
         </View>
 

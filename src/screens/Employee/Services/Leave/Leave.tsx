@@ -15,7 +15,7 @@ export default function Leave() {
   return (
     <Screen
       scroll={false}
-      style={{ paddingHorizontal: Spacing.md }}
+      padding={false}
       showBackground
       header={
         <Header

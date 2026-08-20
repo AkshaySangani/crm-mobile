@@ -15,8 +15,11 @@ export const pathNames = {
     // sub screens
     Attendance: "Attendance",
     Leave: "Leave",
+    LeaveDetails: "LeaveDetails",
     ApplyLeave: "ApplyLeave",
     Reimbursement: "Reimbursement",
+    AddReimbursement: "AddReimbursement",
+    ReimbursementDetails: "ReimbursementDetails",
     ManualPunch: "ManualPunch",
     Payslip: "Payslip",
     Resign: "Resign",

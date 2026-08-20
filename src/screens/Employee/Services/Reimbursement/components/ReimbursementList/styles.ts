@@ -3,19 +3,24 @@ import {
   Colors,
   FontSize,
   Radius,
+  Shadows,
   Spacing,
 } from "@/theme";
 
 export const styles = StyleSheet.create({
   listContent: {
     paddingBottom: Spacing.md,
+    paddingHorizontal: Spacing.sm,
+    gap: Spacing.sm
   },
 
   card: {
-    marginBottom: Spacing.xs,
     padding: 0,
     backgroundColor: Colors.common.white,
     borderRadius: Radius.sm,
+    borderWidth: 0.2,
+    borderColor: Colors.border.primary,
+    ...Shadows.md
   },
 
   cardContent: {
@@ -23,6 +28,14 @@ export const styles = StyleSheet.create({
     paddingHorizontal: Spacing.sm,
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    gap: Spacing.sm
+  },
+
+  leftSideContent: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.sm,
   },
 
   iconContainer: {
@@ -35,52 +48,15 @@ export const styles = StyleSheet.create({
   },
 
   details: {
-    flex: 1,
+    flexDirection: "column",
     justifyContent: "center",
-    gap: Spacing.sm,
-    minWidth: 0,
-  },
-
-  date: {
-    marginTop: 1,
-    fontSize: FontSize.xs,
-    lineHeight: 11,
+    gap: Spacing.xs,
   },
 
   rightSection: {
-    alignItems: "flex-end",
+    alignItems: "center",
+    flexDirection: "row",
     justifyContent: "center",
     gap: Spacing.sm,
-    minWidth: 65,
-    marginLeft: Spacing.xs,
-  },
-
-  amount: {
-    marginBottom: 2,
-    fontSize: FontSize.sm,
-  },
-
-  statusBadge: {
-    minWidth: 50,
-    paddingHorizontal: 5,
-    paddingVertical: 2,
-    borderRadius: Radius.xs,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  statusText: {
-    fontSize: FontSize.xs,
-    lineHeight: 10,
-  },
-
-  approvedDate: {
-    marginTop: 1,
-    fontSize: FontSize.xs,
-    lineHeight: 9,
-  },
-
-  arrow: {
-    marginLeft: 2,
   },
 });

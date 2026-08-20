@@ -9,18 +9,18 @@ import {
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-
-  content: {
-    flex: 1,
-    borderTopLeftRadius: Radius.lg,
-    borderTopRightRadius: Radius.lg,
+    flexDirection: "column",
+    gap: Spacing.sm,
+    backgroundColor: Colors.common.white,
+    padding: Spacing.md,
+    borderTopEndRadius: Radius.xxl,
+    borderTopLeftRadius: Radius.xxl,
   },
 
   filtersRow: {
     flexDirection: "row",
-    gap: Spacing.xs,
-    marginBottom: Spacing.sm,
+    justifyContent: "space-between",
+    gap: Spacing.xs
   },
 
   filterButton: {
@@ -42,11 +42,6 @@ export const styles = StyleSheet.create({
 
   listSection: {
     flex: 1,
-    marginTop: Spacing.sm,
-  },
-
-  sectionTitle: {
-    marginBottom: Spacing.xs,
-    paddingHorizontal: Spacing.xs,
+    gap: Spacing.sm
   },
 });

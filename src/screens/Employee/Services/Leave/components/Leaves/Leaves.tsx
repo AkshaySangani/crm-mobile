@@ -8,6 +8,9 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { Colors } from "@/theme";
 import { AppCard, AppText } from "@/components";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigationProp } from "@/navigation/types";
+import { pathNames } from "@/utils/path-names";
 
 type LeaveStatus = "Approved" | "Pending" | "Rejected";
 
@@ -114,6 +117,7 @@ const statusConfig = {
 };
 
 export default function Leaves({onAddLeave}: {onAddLeave: () => void}) {
+
   return (
     <View style={styles.container}>
         {/* Filters */}
@@ -307,10 +311,11 @@ interface LeaveHistoryCardProps {
 function LeaveHistoryCard({
   leave,
 }: LeaveHistoryCardProps) {
+  const navigation = useNavigation<AppNavigationProp>();
   const status = statusConfig[leave.status];
 
   return (
-    <AppCard style={styles.leaveCard}>
+    <AppCard style={styles.leaveCard} onPress={() => navigation.navigate(pathNames.employee.LeaveDetails)}>
       {/* Icon */}
       <View
         style={[

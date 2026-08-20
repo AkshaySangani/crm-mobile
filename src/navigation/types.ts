@@ -18,8 +18,11 @@ export type AppStackParamList = {
   
   [pathNames.employee.Attendance]: undefined;
   [pathNames.employee.Leave]: undefined;
+  [pathNames.employee.LeaveDetails]: undefined;
   [pathNames.employee.ApplyLeave]: undefined;
   [pathNames.employee.Reimbursement]: undefined;
+  [pathNames.employee.AddReimbursement]: undefined;
+  [pathNames.employee.ReimbursementDetails]: undefined;
   [pathNames.employee.ManualPunch]: undefined;
   [pathNames.employee.Payslip]: undefined;
   [pathNames.employee.Resign]: undefined;

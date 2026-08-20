@@ -3,6 +3,7 @@ import {
   Colors,
   FontSize,
   Radius,
+  Shadows,
   Spacing,
 } from "@/theme";
 
@@ -14,6 +15,7 @@ export const styles = StyleSheet.create({
 
   card: {
     flex: 1,
+    gap: Spacing.xs,
     minHeight: 100,
     paddingVertical: Spacing.xs,
     paddingHorizontal: 2,
@@ -21,6 +23,9 @@ export const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: Radius.sm,
     backgroundColor: Colors.common.white,
+    borderWidth: 1,
+        borderColor: Colors.border.primary,
+        ...Shadows.md
   },
 
   iconContainer: {
@@ -37,14 +42,12 @@ export const styles = StyleSheet.create({
   },
 
   label: {
-    marginTop: 1,
     textAlign: "center",
     fontSize: FontSize.xxs,
     lineHeight: 11,
   },
 
   amount: {
-    marginTop: 2,
     fontSize: FontSize.xs,
     lineHeight: 11,
   },

@@ -7,11 +7,14 @@ import AppText from "@/components/ui/AppText";
 import { Colors } from "@/theme";
 
 import { styles } from "./styles";
+import StatusBadge from "@/components/ui/StatusBadge/StatusBadge";
+import { statusEnum } from "@/utils/enums";
+import { getFirstCharacter } from "@/utils/helper";
+import { useNavigation } from "@react-navigation/native";
+import { AppNavigationProp } from "@/navigation/types";
+import { pathNames } from "@/utils/path-names";
 
-type ReimbursementStatus =
-  | "Approved"
-  | "Pending"
-  | "Rejected";
+type ReimbursementStatus = "Approved" | "Pending" | "Rejected";
 
 type ReimbursementItem = {
   id: string;
@@ -45,6 +48,7 @@ const reimbursementData: ReimbursementItem[] = [
     date: "May 18, 2025",
     category: "Travel",
     amount: "₹ 5,800",
+    approvedDate: "May 6, 2025",
     status: "Pending",
     icon: "gas-station-outline",
     iconColor: "#9B5CFF",
@@ -80,6 +84,7 @@ const reimbursementData: ReimbursementItem[] = [
     date: "May 8, 2025",
     category: "Other",
     amount: "₹ 950",
+    approvedDate: "May 6, 2025",
     status: "Pending",
     icon: "file-document-outline",
     iconColor: "#FF9F43",
@@ -111,125 +116,76 @@ const reimbursementData: ReimbursementItem[] = [
   },
 ];
 
-const statusColors = {
-  Approved: {
-    text: "#46A758",
-    background: "#EAF7EC",
-  },
-  Pending: {
-    text: "#E89A32",
-    background: "#FFF3E2",
-  },
-  Rejected: {
-    text: "#E04B4B",
-    background: "#FFECEC",
-  },
-};
-
 const ReimbursementList = () => {
-  const renderItem = ({
-    item,
-  }: {
-    item: ReimbursementItem;
-  }) => {
-    const statusStyle = statusColors[item.status];
+  const navigation =
+                useNavigation<AppNavigationProp>();
+  const renderItem = ({ item }: { item: ReimbursementItem }) => {
 
     return (
-      <AppCard style={styles.card}>
-        <TouchableOpacity
-          activeOpacity={0.8}
-          style={styles.cardContent}
-        >
-          {/* Left icon */}
-          <View
-            style={[
-              styles.iconContainer,
-              {
-                backgroundColor: item.iconBackground,
-              },
-            ]}
-          >
-            <MaterialCommunityIcons
-              name={item.icon}
-              size={17}
-              color={item.iconColor}
-            />
-          </View>
-
-          {/* Details */}
-          <View style={styles.details}>
-            <AppText
-              size="xs"
-              weight="semiBold"
-              color={Colors.text.primary}
-              numberOfLines={1}
+      <AppCard style={styles.card} >
+        <TouchableOpacity activeOpacity={0.8} style={styles.cardContent} onPress={() => navigation.navigate(pathNames.employee.ReimbursementDetails)}>
+          <View style={styles.leftSideContent}>
+            {/* Left icon */}
+            <View
+              style={[
+                styles.iconContainer,
+                {
+                  backgroundColor: item.iconBackground,
+                },
+              ]}
             >
-              {item.title}
-            </AppText>
+                <AppText
+                size="sm"
+                weight="semiBold"
+                color={Colors.text.primary}
+                numberOfLines={1}
+              >
+               {getFirstCharacter(item.title, 2)}
+              </AppText>
+              
+            </View>
 
-            <AppText
-              size="xs"
-              color={Colors.text.secondary}
-              style={styles.date}
-            >
-              {item.date}
-            </AppText>
+            {/* Details */}
+            <View style={styles.details}>
+              <AppText
+                size="sm"
+                weight="semiBold"
+                color={Colors.text.primary}
+                numberOfLines={1}
+              >
+                {item.title}
+              </AppText>
 
-            <AppText
-              size="xs"
-              color={Colors.text.secondary}
-            >
-              {item.category}
-            </AppText>
+              <AppText size="xs" color={Colors.text.secondary}>
+                {item.date}
+              </AppText>
+            </View>
           </View>
 
           {/* Right section */}
           <View style={styles.rightSection}>
-            <AppText
-              size="xs"
-              weight="bold"
-              color={Colors.text.primary}
-              style={styles.amount}
-            >
-              {item.amount}
-            </AppText>
-
-            <View
-              style={[
-                styles.statusBadge,
-                {
-                  backgroundColor: statusStyle.background,
-                },
-              ]}
-            >
-              <AppText
-                size="xs"
-                weight="semiBold"
-                color={statusStyle.text}
-                style={styles.statusText}
-              >
-                {item.status}
+            <View style={[styles.details, { alignItems: "flex-end" }]}>
+              <AppText size="sm" weight="bold" color={Colors.text.primary}>
+                {item.amount}
               </AppText>
+
+              <StatusBadge status={statusEnum.APPROVED} />
+
+              {item.approvedDate && (
+                <AppText size="xs" color={Colors.text.secondary}>
+                  {item.approvedDate}
+                </AppText>
+              )}
             </View>
-
-            {item.approvedDate && (
-              <AppText
-                size="xs"
-                color={Colors.text.secondary}
-                style={styles.approvedDate}
-              >
-                {item.approvedDate}
-              </AppText>
-            )}
-          </View>
+          
 
           {/* Arrow */}
           <MaterialCommunityIcons
             name="chevron-right"
-            size={18}
+            size={22}
             color={Colors.brand.primary}
-            style={styles.arrow}
           />
+          </View>
         </TouchableOpacity>
       </AppCard>
     );
