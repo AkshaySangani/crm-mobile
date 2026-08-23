@@ -22,3 +22,18 @@ export enum statusEnum {
   PROMOTED = "PROMOTED",
   HOLD = "HOLD",
 }
+
+// define enum for attendance method
+export enum AttendanceMethodEnum {
+  MOBILE = "MOBILE",
+  WEB = "WEB",
+  BIOMETRIC = "BIOMETRIC",
+  QR = "QR",
+}
+
+export enum AttendanceMethodNames {
+  MOBILE = "Mobile",
+  WEB = "Web",
+  BIOMETRIC = "Biometric",
+  QR = "QR",
+}

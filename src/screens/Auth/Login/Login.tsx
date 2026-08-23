@@ -91,6 +91,8 @@ const Login = () => {
         password,
       });
 
+      console.log("response", response)
+
       if (response.success) {
         // set into auth store
         login(response.data);

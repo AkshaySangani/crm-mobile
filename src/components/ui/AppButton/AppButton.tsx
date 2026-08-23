@@ -1,19 +1,21 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import {
   TouchableOpacity,
   ActivityIndicator,
   TouchableOpacityProps,
+  View,
 } from "react-native";
 import { Colors, Radius, Sizes } from "@/theme";
 import AppText from "../AppText";
 import styles from "./styles";
 
-type ButtonVariant = "primary" | "secondary" | "danger";
+type ButtonVariant = "primary" | "primaryBrand" | "secondary" | "danger";
 interface AppButtonProps extends TouchableOpacityProps {
   title: string;
   loading?: boolean;
   variant?: ButtonVariant;
   fullWidth?: boolean;
+  leftIcon?: ReactNode;
 }
 
 const AppButton = ({
@@ -23,12 +25,14 @@ const AppButton = ({
   fullWidth = true,
   disabled,
   style,
+  leftIcon,
   ...props
 }: AppButtonProps) => {
   const isDisabled = disabled || loading;
 
   const backgroundColor = {
     primary: Colors.button.primary,
+    primaryBrand: Colors.brand.primary,
     secondary: Colors.button.secondary,
     danger: Colors.button.danger,
   }[variant];
@@ -56,9 +60,12 @@ const AppButton = ({
       {loading ? (
         <ActivityIndicator size="small" color={Colors.common.white} />
       ) : (
-        <AppText weight="semiBold" color={textColor}>
-          {title}
-        </AppText>
+        <View style={styles.buttonTextContainer}>
+          {leftIcon}
+          <AppText weight="semiBold" color={textColor}>
+            {title}
+          </AppText>
+        </View>
       )}
     </TouchableOpacity>
   );

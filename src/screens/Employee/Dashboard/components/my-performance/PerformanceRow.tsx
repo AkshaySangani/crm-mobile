@@ -24,14 +24,6 @@ const PerformanceRow = ({
 }: PerformanceRowProps) => {
   return (
     <View style={styles.performanceRow}>
-      {/* Calendar Icon */}
-      <View style={styles.iconContainer}>
-        <Ionicons
-          name="calendar-outline"
-          size={27}
-          color={Colors.brand.primary}
-        />
-      </View>
 
       {/* Date */}
       <View style={styles.dateContainer}>

@@ -88,6 +88,11 @@ export const styles = StyleSheet.create({
     gap: Spacing.sm,
   },
 
+historyListContent: {
+  gap: 12,
+  paddingBottom: 20,
+},
+
   leaveCard: {
     minHeight: 128,
     flexDirection: "row",

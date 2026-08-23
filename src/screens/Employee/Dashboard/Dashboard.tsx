@@ -1,16 +1,19 @@
 import React from "react";
-import { Image, Pressable, ScrollView, View } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View } from "react-native";
 import { Colors } from "@/theme";
 import { AppText, Screen } from "@/components";
-import ManualCheckIn from "./components/manual-check-in";
+import PunchInPunchOut from "./components/punch-in-punch-out";
 import MyPerformance from "./components/my-performance";
 import AppliedLeave from "./components/applied-leaves";
 import Reimbursement from "./components/reimbursement";
 import ManualPunch from "./components/manual-punch";
 import { styles } from "./styles";
+import AppImage from "@/components/ui/AppImage";
+import { useAuthStore } from "@/store/auth.store";
+import { getGreeting } from "@/utils/helper";
 
 const HomeScreen = () => {
+  const {user} = useAuthStore();
   return (
     <Screen
       showBackground
@@ -18,16 +21,23 @@ const HomeScreen = () => {
         <View style={styles.header}>
           <View style={styles.headerTop}>
             <View style={styles.profileContainer}>
-              <Image
-                source={{
-                  uri: "https://i.pravatar.cc/150?img=12",
-                }}
+              <AppImage
+                src={user?.profileImage}
                 style={styles.profileImage}
+                contentFit="contain"
+                containerStyle={{
+                  width: 62,
+                  height: 62,
+                  borderRadius: "100%",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
               />
 
               <View style={styles.greetingContainer}>
                 <AppText size="sm" color="rgba(255,255,255,0.75)">
-                  Good Morning
+                  {getGreeting()}
                 </AppText>
 
                 <AppText
@@ -36,7 +46,7 @@ const HomeScreen = () => {
                   color={Colors.common.white}
                   style={styles.userName}
                 >
-                  Ferdous Islam
+                  {user?.firstName}{" "}{user?.lastName}
                 </AppText>
               </View>
             </View>
@@ -47,7 +57,7 @@ const HomeScreen = () => {
       {/* ================= CONTENT ================= */}
       <View style={styles.content}>
         {/* ================= Punch In ================= */}
-        <ManualCheckIn />
+        <PunchInPunchOut />
         {/* ================= MY PERFORMANCE ================= */}
         <MyPerformance />
 

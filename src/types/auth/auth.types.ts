@@ -3,6 +3,10 @@ export interface LoginPayload {
   password: string;
 }
 
+export interface LoginResponse {
+  
+}
+
 export interface ForgotPasswordPayload {
   email: string;
 }

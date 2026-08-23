@@ -19,7 +19,7 @@ const AuthLayout = ({title,children}: AuthLayoutProps) => {
         <View style={styles.logoContainer}>
           <View style={styles.logoBox}>
             <AppImage
-              source={require("@/assets/images/IEKA-logo.jpeg")}
+              src={require("@/assets/images/IEKA-logo.jpeg")}
               contentFit="contain"
               containerStyle={{
                 width: 120,

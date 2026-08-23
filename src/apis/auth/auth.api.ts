@@ -5,7 +5,7 @@ import {
   LogoutPayload,
   PasswordChangePayload,
   ResetPasswordPayload,
-} from "@/types/auth.types";
+} from "@/types/auth/auth.types";
 
 export const loginApi = (payload: LoginPayload) =>
   apiRequest.post("/auth/login", payload, {

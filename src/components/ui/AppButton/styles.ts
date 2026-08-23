@@ -13,6 +13,12 @@ export default StyleSheet.create({
     width: "100%",
   },
 
+   buttonTextContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: Spacing.sm,
+  },
+
   disabled: {
     opacity: 0.6,
   },

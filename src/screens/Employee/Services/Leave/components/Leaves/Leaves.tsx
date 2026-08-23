@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  ScrollView,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { FlatList, ScrollView, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { styles } from "./styles";
 import { Colors } from "@/theme";
@@ -11,6 +7,7 @@ import { AppCard, AppText } from "@/components";
 import { useNavigation } from "@react-navigation/native";
 import { AppNavigationProp } from "@/navigation/types";
 import { pathNames } from "@/utils/path-names";
+import { getFirstCharacter } from "@/utils/helper";
 
 type LeaveStatus = "Approved" | "Pending" | "Rejected";
 
@@ -116,123 +113,117 @@ const statusConfig = {
   },
 };
 
-export default function Leaves({onAddLeave}: {onAddLeave: () => void}) {
-
+export default function Leaves({ onAddLeave }: { onAddLeave: () => void }) {
   return (
     <View style={styles.container}>
-        {/* Filters */}
-        <View style={styles.filtersRow}>
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.filterButton}
+      {/* Filters */}
+      <View style={styles.filtersRow}>
+        <TouchableOpacity activeOpacity={0.8} style={styles.filterButton}>
+          <MaterialCommunityIcons
+            name="calendar-outline"
+            size={21}
+            color={Colors.brand.primary}
+          />
+
+          <AppText
+            size="sm"
+            color={Colors.text.primary}
+            style={styles.filterText}
           >
-            <MaterialCommunityIcons
-              name="calendar-outline"
-              size={21}
-              color={Colors.brand.primary}
-            />
+            All Types
+          </AppText>
 
-            <AppText
-              size="sm"
-              color={Colors.text.primary}
-              style={styles.filterText}
-            >
-              All Types
-            </AppText>
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={22}
+            color={Colors.brand.primary}
+          />
+        </TouchableOpacity>
 
-            <MaterialCommunityIcons
-              name="chevron-down"
-              size={22}
-              color={Colors.brand.primary}
-            />
-          </TouchableOpacity>
+        <TouchableOpacity activeOpacity={0.8} style={styles.filterButton}>
+          <MaterialCommunityIcons
+            name="calendar-outline"
+            size={21}
+            color={Colors.brand.primary}
+          />
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.filterButton}
+          <AppText
+            size="sm"
+            color={Colors.text.primary}
+            style={styles.filterText}
           >
-            <MaterialCommunityIcons
-              name="calendar-outline"
-              size={21}
-              color={Colors.brand.primary}
-            />
+            2025
+          </AppText>
 
-            <AppText
-              size="sm"
-              color={Colors.text.primary}
-              style={styles.filterText}
-            >
-              2025
-            </AppText>
-
-            <MaterialCommunityIcons
-              name="chevron-down"
-              size={22}
-              color={Colors.brand.primary}
-            />
-          </TouchableOpacity>
-        </View>
-
-        {/* Statistics */}
-        <AppCard style={styles.statsCard}>
-          <StatItem
-            icon="calendar-check-outline"
-            iconColor={Colors.status.success}
-            iconBackground={Colors.statusLight.success}
-            value="12"
-            label="Total Leaves"
-            valueColor={Colors.status.success}
+          <MaterialCommunityIcons
+            name="chevron-down"
+            size={22}
+            color={Colors.brand.primary}
           />
+        </TouchableOpacity>
+      </View>
 
-          <View style={styles.statDivider} />
+      {/* Statistics */}
+      <AppCard style={styles.statsCard}>
+        <StatItem
+          icon="calendar-check-outline"
+          iconColor={Colors.status.success}
+          iconBackground={Colors.statusLight.success}
+          value="12"
+          label="Total Leaves"
+          valueColor={Colors.status.success}
+        />
 
-          <StatItem
-            icon="check-circle-outline"
-            iconColor={Colors.brand.primary}
-            iconBackground={Colors.brand.primaryLight}
-            value="06"
-            label="Approved"
-          />
+        <View style={styles.statDivider} />
 
-          <View style={styles.statDivider} />
+        <StatItem
+          icon="check-circle-outline"
+          iconColor={Colors.brand.primary}
+          iconBackground={Colors.brand.primaryLight}
+          value="06"
+          label="Approved"
+        />
 
-          <StatItem
-            icon="clock-outline"
-            iconColor={Colors.status.warning}
-            iconBackground={Colors.statusLight.warning}
-            value="03"
-            label="Pending"
-          />
+        <View style={styles.statDivider} />
 
-          <View style={styles.statDivider} />
+        <StatItem
+          icon="clock-outline"
+          iconColor={Colors.status.warning}
+          iconBackground={Colors.statusLight.warning}
+          value="03"
+          label="Pending"
+        />
 
-          <StatItem
-            icon="close-circle-outline"
-            iconColor={Colors.status.danger}
-            iconBackground={Colors.statusLight.danger}
-            value="03"
-            label="Rejected"
-          />
-        </AppCard>
+        <View style={styles.statDivider} />
 
-        {/* History */}
-        <AppText
-          size="md"
-          weight="semiBold"
-          color={Colors.text.primary}
-          style={styles.historyTitle}
-        >
-          Leave History
-        </AppText>
+        <StatItem
+          icon="close-circle-outline"
+          iconColor={Colors.status.danger}
+          iconBackground={Colors.statusLight.danger}
+          value="03"
+          label="Rejected"
+        />
+      </AppCard>
 
-        <View style={styles.historyList}>
-          {leaveHistory.map((leave) => (
-            <LeaveHistoryCard
-              key={leave.id}
-              leave={leave}
-            />
-          ))}
-        </View>
+      {/* History */}
+      <AppText
+        size="md"
+        weight="semiBold"
+        color={Colors.text.primary}
+        style={styles.historyTitle}
+      >
+        Leave History
+      </AppText>
+
+      <View style={styles.historyList}>
+        <FlatList
+          data={leaveHistory}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => <LeaveHistoryCard leave={item} />}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.historyListContent}
+        />
+      </View>
 
       {/* Floating Action Button */}
       <TouchableOpacity
@@ -277,11 +268,7 @@ function StatItem({
           },
         ]}
       >
-        <MaterialCommunityIcons
-          name={icon}
-          size={23}
-          color={iconColor}
-        />
+        <MaterialCommunityIcons name={icon} size={23} color={iconColor} />
       </View>
 
       <AppText
@@ -293,11 +280,7 @@ function StatItem({
         {value}
       </AppText>
 
-      <AppText
-        size="xs"
-        color={Colors.text.secondary}
-        numberOfLines={1}
-      >
+      <AppText size="xs" color={Colors.text.secondary} numberOfLines={1}>
         {label}
       </AppText>
     </View>
@@ -308,14 +291,15 @@ interface LeaveHistoryCardProps {
   leave: LeaveItem;
 }
 
-function LeaveHistoryCard({
-  leave,
-}: LeaveHistoryCardProps) {
+function LeaveHistoryCard({ leave }: LeaveHistoryCardProps) {
   const navigation = useNavigation<AppNavigationProp>();
   const status = statusConfig[leave.status];
 
   return (
-    <AppCard style={styles.leaveCard} onPress={() => navigation.navigate(pathNames.employee.LeaveDetails)}>
+    <AppCard
+      style={styles.leaveCard}
+      onPress={() => navigation.navigate(pathNames.employee.LeaveDetails)}
+    >
       {/* Icon */}
       <View
         style={[
@@ -325,11 +309,9 @@ function LeaveHistoryCard({
           },
         ]}
       >
-        <MaterialCommunityIcons
-          name={leave.icon}
-          size={27}
-          color={leave.iconColor}
-        />
+        <AppText size="xxl" weight="bold">
+          {getFirstCharacter(leave.type)}
+        </AppText>
       </View>
 
       {/* Main Information */}
@@ -373,11 +355,7 @@ function LeaveHistoryCard({
             },
           ]}
         >
-          <AppText
-            size="xs"
-            weight="semiBold"
-            color={status.color}
-          >
+          <AppText size="xs" weight="semiBold" color={status.color}>
             {leave.status}
           </AppText>
         </View>
@@ -390,11 +368,7 @@ function LeaveHistoryCard({
           Applied on
         </AppText>
 
-        <AppText
-          size="xs"
-          color={Colors.text.secondary}
-          numberOfLines={1}
-        >
+        <AppText size="xs" color={Colors.text.secondary} numberOfLines={1}>
           {leave.appliedOn}
         </AppText>
       </View>

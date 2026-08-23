@@ -25,16 +25,6 @@ const styles = StyleSheet.create({
     gap: Spacing.sm
   },
 
-  iconContainer: {
-    padding: Spacing.sm,
-    borderRadius: Radius.md,
-
-    backgroundColor: "#EAF3FF",
-
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
   dateContainer: {
     width: 100,
   },
