@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
 
   cardContent: {
     paddingVertical: Spacing.sm,
-    paddingHorizontal: Spacing.sm,
+    paddingHorizontal: Spacing.md,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -39,12 +39,13 @@ export const styles = StyleSheet.create({
   },
 
   iconContainer: {
-    width: 34,
-    height: 34,
+    width: 42,
+    height: 42,
     borderRadius: Radius.sm,
     alignItems: "center",
     justifyContent: "center",
     marginRight: Spacing.xs,
+    backgroundColor: Colors.statusLight.info
   },
 
   details: {

@@ -6,9 +6,9 @@ import { styles } from "./styles";
 import { Colors } from "@/theme";
 import { FlatList } from "react-native";
 import { AppCard, Screen } from "@/components";
-import { useNavigation } from "expo-router";
 import { AppNavigationProp, AppStackParamList } from "@/navigation/types";
 import { pathNames } from "@/utils/path-names";
+import { useNavigation } from "@react-navigation/native";
 
 type ServiceItem = {
   title: string;

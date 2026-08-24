@@ -17,7 +17,7 @@ const DescriptionCard = ({ description }: Props) => {
       </AppText>
 
       <View style={styles.descriptionBox}>
-        <AppText style={styles.descriptionText}>
+        <AppText numberOfLines={3} style={styles.descriptionText}>
           {description}
         </AppText>
       </View>

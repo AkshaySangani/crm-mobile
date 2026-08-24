@@ -2,7 +2,6 @@ import { StyleSheet } from "react-native";
 import { Colors, FontSize, Radius, Spacing } from "@/theme";
 
 export const styles = StyleSheet.create({
-
   contentContainer: {
     flex: 1,
     flexDirection: "column",
@@ -37,7 +36,7 @@ export const styles = StyleSheet.create({
     borderRadius: 32,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#E8F6E8",
+    backgroundColor: Colors.brand.primary,
     marginRight: Spacing.sm,
   },
 
@@ -221,17 +220,21 @@ export const styles = StyleSheet.create({
     padding: Spacing.md,
   },
 
+  attachmentGrid: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 10,
+  },
+
   attachmentItem: {
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: Spacing.sm,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: Colors.border.input,
+    paddingVertical: Spacing.sm
   },
 
   attachmentImageWrapper: {
-    width: 112,
-    height: 96,
+    width: 100,
+    height: 100,
     borderRadius: Radius.sm,
     overflow: "hidden",
     backgroundColor: "#F2F3F5",

@@ -17,6 +17,11 @@ export const styles = StyleSheet.create({
     borderTopLeftRadius: Radius.xxl,
   },
 
+  fixedHeader: {
+    flexShrink: 0,
+    gap: Spacing.sm
+  },
+
   filtersRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -41,7 +46,35 @@ export const styles = StyleSheet.create({
   },
 
   listSection: {
-    flex: 1,
     gap: Spacing.sm
+  },
+
+  emptyContainer: {
+      minHeight: 250,
+      alignItems: "center",
+      justifyContent:
+        "center",
+      paddingHorizontal:
+        Spacing.md,
+    },
+
+    listContent: {
+      gap: Spacing.sm,
+      paddingBottom:
+        Spacing.xl,
+    },
+
+    footerLoader: {
+      paddingVertical:
+        Spacing.md,
+      alignItems: "center",
+      justifyContent:
+        "center",
+    },
+
+    emptyListContent: {
+    flexGrow: 1,
+    paddingHorizontal: Spacing.md,
+    paddingBottom: Spacing.xl,
   },
 });

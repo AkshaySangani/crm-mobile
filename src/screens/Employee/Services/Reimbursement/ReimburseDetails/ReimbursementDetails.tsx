@@ -1,84 +1,120 @@
-import React from "react";
-import { ScrollView, TouchableOpacity, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View } from "react-native";
+
 import { styles } from "./styles";
 
 import ReimbursementHeader from "./components/ReimbursementHeader";
 import DateInfoCard from "./components/DateInfoCard";
-import ExpenseDetails from "./components/ExpenseDetails";
 import DescriptionCard from "./components/DescriptionCard";
 import AttachmentsCard from "./components/AttachmentsCard";
 import ApprovalDetails from "./components/ApprovalDetails";
+
 import { Header, Screen } from "@/components";
+
 import { useNavigation } from "@react-navigation/native";
+
 import { AppNavigationProp } from "@/navigation/types";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Colors } from "@/theme";
 
-export interface ReimbursementAttachment {
-  id: string;
-  name: string;
-  uri: string;
-  type?: "image" | "pdf" | "file";
-}
+import { getReimbursementById } from "@/apis/employee/reimbursement.api";
+import { ApiResponse } from "@/types/api.types";
+import { useAppRoute } from "@/hooks/useAppRoute";
+import { IReimbursement } from "@/types/employee/reimbursement.types";
+import { RoleEnum, statusEnum } from "@/utils/enums";
+import { DateFormat, formatDate } from "@/utils/date-format";
 
-export interface ReimbursementDetailsData {
-  id: string;
-  expenseType: string;
-  category: string;
-  amount: number;
-  totalAmount: number;
-  status: "Approved" | "Pending" | "Rejected";
-  requestDate: string;
-  expenseDate: string;
-  description: string;
-
-  attachments: ReimbursementAttachment[];
-
-  submittedOn: string;
-  approvedOn?: string;
-  approvedBy?: string;
-  approvedByRole?: string;
-}
-
-const reimbursementData: ReimbursementDetailsData = {
-  id: "1",
-  expenseType: "Fuel Expense",
-  category: "Travel",
-  amount: 2500,
-  totalAmount: 2500,
-  status: "Approved",
-
-  requestDate: "May 20, 2025",
-  expenseDate: "May 20, 2025",
-
-  description:
-    "Fuel expenses for client meeting travel from Ahmedabad to Vadodara and return.",
-
-  attachments: [
-    {
-      id: "1",
-      name: "Receipt 1",
-      uri: "https://images.unsplash.com/photo-1586864387967-d02ef85d93e8",
-      type: "image",
-    },
-    {
-      id: "2",
-      name: "Receipt 2",
-      uri: "https://images.unsplash.com/photo-1554224155-6726b3ff858f",
-      type: "image",
-    },
-  ],
-
-  submittedOn: "May 20, 2025  |  11:30 AM",
-  approvedOn: "May 22, 2025  |  03:45 PM",
-  approvedBy: "Arjunsinh Rathod",
-  approvedByRole: "Reporting Manager",
-};
+/* =====================================================
+   COMPONENT
+===================================================== */
 
 const ReimbursementDetails = () => {
-     const navigation = useNavigation<AppNavigationProp>();
+  const navigation = useNavigation<AppNavigationProp>();
+
+  const route = useAppRoute<"ReimbursementDetails">();
+
+  const params = route.params;
+
+  /*
+   * If your navigation route contains:
+   *
+   * {
+   *   id: string
+   * }
+   *
+   * then use that ID here.
+   */
+  const reimbursementId = params.id;
+
+  /* ===================================================
+     STATE
+  =================================================== */
+
+  const initialReimbursement: IReimbursement = {
+    _id: "",
+    companyId: "",
+    branchId: "",
+    userId: {
+      _id: "",
+      firstName: "",
+      lastName: "",
+      profileImage: "",
+      role: RoleEnum.EMPLOYEE,
+    },
+    name: "",
+    date: "",
+    description: "",
+    amount: 0,
+    status: statusEnum.APPROVED,
+    documents: [],
+    assignedBy: "",
+    createdAt: "",
+    updatedAt: "",
+  };
+  const [reimbursement, setReimbursement] =
+    useState<IReimbursement>(initialReimbursement);
+
+  const [loading, setLoading] = useState<boolean>(false);
+
+  /* ===================================================
+     GET REIMBURSEMENT DETAILS
+  =================================================== */
+
+  const fetchReimbursementDetails = async () => {
+    if (!reimbursementId) {
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const response = (await getReimbursementById(
+        reimbursementId,
+      )) as ApiResponse;
+
+      if (response?.success && response?.data) {
+        setReimbursement(response.data);
+      } else {
+        setReimbursement(initialReimbursement);
+      }
+    } catch (err) {
+      console.log("Get reimbursement details error:", err);
+
+      setReimbursement(initialReimbursement);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  /* ===================================================
+     API CALL
+  =================================================== */
+
+  useEffect(() => {
+    fetchReimbursementDetails();
+  }, [reimbursementId]);
+
   return (
-    <Screen padding={false}
+    <Screen
+      padding={false}
       scroll={true}
       showBackground
       header={
@@ -87,35 +123,25 @@ const ReimbursementDetails = () => {
           showBack
           onBackPress={() => navigation.goBack()}
         />
-      }>
-
-      <View
-        style={styles.contentContainer}
-      >
-        <ReimbursementHeader data={reimbursementData} />
+      }
+    >
+      <View style={styles.contentContainer}>
+        <ReimbursementHeader data={reimbursement} />
 
         <DateInfoCard
-          requestDate={reimbursementData.requestDate}
-          expenseDate={reimbursementData.expenseDate}
+          requestDate={formatDate(reimbursement.createdAt, DateFormat.FULL_DATE)}
+          expenseDate={formatDate(reimbursement.date, DateFormat.FULL_DATE)}
         />
 
-        <ExpenseDetails
-          expenseType={reimbursementData.expenseType}
-          amount={reimbursementData.amount}
-          totalAmount={reimbursementData.totalAmount}
-        />
+        {reimbursement.description ? <DescriptionCard description={reimbursement.description} /> : <></>}
 
-        <DescriptionCard description={reimbursementData.description} />
-
-        <AttachmentsCard
-          attachments={reimbursementData.attachments}
-        />
+        {reimbursement.documents?.length > 0 ? <AttachmentsCard attachments={reimbursement.documents} />: <></>}
 
         <ApprovalDetails
-          submittedOn={reimbursementData.submittedOn}
-          approvedOn={reimbursementData.approvedOn}
-          approvedBy={reimbursementData.approvedBy}
-          approvedByRole={reimbursementData.approvedByRole}
+          submittedOn={formatDate(reimbursement.createdAt, DateFormat.FULL_DATE)}
+          approvedOn={formatDate(reimbursement.date, DateFormat.FULL_DATE)}
+          approvedBy={reimbursement.assignedBy}
+          approvedByRole={""}
         />
       </View>
     </Screen>

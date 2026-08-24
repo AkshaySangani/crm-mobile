@@ -13,3 +13,7 @@ export const statusMessage: Record<statusEnum, string> = {
   [statusEnum.PROMOTED]: "Promoted",
   [statusEnum.HOLD]: "Hold",
 };
+
+export const currency = {
+  INR: "₹"
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AppCard from "@/components/ui/AppCard";
@@ -8,55 +8,29 @@ import { Colors } from "@/theme";
 
 import { styles } from "./styles";
 
-type StatItem = {
+export type StatItem = {
+  id: string;
   label: string;
-  count: string;
-  amount: string;
+  count: number;
+  amount: number;
   icon: React.ComponentProps<typeof MaterialCommunityIcons>["name"];
   iconColor: string;
   backgroundColor: string;
 };
 
-const stats: StatItem[] = [
-  {
-    label: "Total Requests",
-    count: "12",
-    amount: "₹ 48,750",
-    icon: "calendar-check-outline",
-    iconColor: "#4CAF50",
-    backgroundColor: "#EAF7EC",
-  },
-  {
-    label: "Approved",
-    count: "06",
-    amount: "₹ 26,250",
-    icon: "check-circle-outline",
-    iconColor: "#3D7BFF",
-    backgroundColor: "#EDF3FF",
-  },
-  {
-    label: "Pending",
-    count: "03",
-    amount: "₹ 12,500",
-    icon: "clock-outline",
-    iconColor: "#FF9F43",
-    backgroundColor: "#FFF4E8",
-  },
-  {
-    label: "Rejected",
-    count: "03",
-    amount: "₹ 10,000",
-    icon: "close-circle-outline",
-    iconColor: "#FF4D4F",
-    backgroundColor: "#FFF0F0",
-  },
-];
+type StatCardsProps = {
+  cards: StatItem[];
+  activeStatus: string;
+  onStatusChange: (status: string) => void;
+};
 
-const StatCards = () => {
+const StatCards = ({ cards, activeStatus, onStatusChange }: StatCardsProps) => {
   return (
     <View style={styles.container}>
-      {stats.map((item) => (
-        <AppCard key={item.label} style={styles.card}>
+      {cards.map((item) => {
+        const isActive = activeStatus === item.id;
+        return (
+        <AppCard key={item.label} style={[styles.card, {backgroundColor: isActive ? item.backgroundColor : ""}]}  onPress={() => onStatusChange(item.id)}>
           <View
             style={[
               styles.iconContainer,
@@ -72,30 +46,19 @@ const StatCards = () => {
             />
           </View>
 
-          <AppText
-            size="sm"
-            weight="bold"
-            color={Colors.text.primary}
-          >
+          <AppText size="sm" weight="bold" color={Colors.text.primary}>
             {item.count}
           </AppText>
 
-          <AppText
-            size="xxs"
-            color={Colors.text.secondary}
-          >
+          <AppText size="xxs" color={Colors.text.secondary}>
             {item.label}
           </AppText>
 
-          <AppText
-            size="xs"
-            weight="semiBold"
-            color={Colors.brand.primary}
-          >
+          <AppText size="xs" weight="semiBold" color={Colors.brand.primary}>
             {item.amount}
           </AppText>
         </AppCard>
-      ))}
+      )})}
     </View>
   );
 };

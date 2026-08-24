@@ -20,6 +20,10 @@ export type AuthNavigationProp =
   export type AppNavigationProp =
   NativeStackNavigationProp<AppStackParamList>;
 
+  export type IdParams = {
+    id: string;
+  }
+
 export type AppStackParamList = {
   MainTabs: undefined;
   
@@ -29,7 +33,7 @@ export type AppStackParamList = {
   [pathNames.employee.ApplyLeave]: undefined;
   [pathNames.employee.Reimbursement]: undefined;
   [pathNames.employee.AddReimbursement]: undefined;
-  [pathNames.employee.ReimbursementDetails]: undefined;
+  [pathNames.employee.ReimbursementDetails]: IdParams;
   [pathNames.employee.ManualPunch]: undefined;
   [pathNames.employee.Payslip]: undefined;
   [pathNames.employee.Resign]: undefined;

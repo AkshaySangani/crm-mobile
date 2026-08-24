@@ -6,7 +6,7 @@ import { useAuthStore } from "@/store/auth.store";
 const RootNavigator = () => {
   const {isAuthenticated} = useAuthStore();
 
-  return true ? <AppNavigator /> : <AuthNavigator />;
+  return isAuthenticated ? <AppNavigator /> : <AuthNavigator />;
 };
 
 export default RootNavigator;
