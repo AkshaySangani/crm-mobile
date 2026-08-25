@@ -3,8 +3,6 @@
 # dependencies
 node_modules/
 
-#.vscode
-.vscode/
 
 # Expo
 .expo/
@@ -52,3 +50,4 @@ temp_interactive_push.bat
 package-lock.json
 branch_structure.json
 package-lock.json
+config.bat
