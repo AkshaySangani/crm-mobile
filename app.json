@@ -7,9 +7,17 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "backgroundColor": "#FFFFFF",
+
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+
     "ios": {
       "supportsTablet": true
     },
+
     "android": {
       "edgeToEdgeEnabled": false,
       "adaptiveIcon": {
@@ -20,11 +28,14 @@
       },
       "predictiveBackGestureEnabled": false
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     },
+
     "plugins": [
       "expo-font",
+      "expo-splash-screen",
       [
         "expo-location",
         {
